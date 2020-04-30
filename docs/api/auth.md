@@ -1,6 +1,6 @@
 # auth
 
-[Source Code](https://github.com/nuxt-community/auth-module/blob/master/lib/core/auth.js)
+[Source Code](https://github.com/nuxt-community/auth-module/blob/dev/src/core/auth.ts)
 
 This module globally injects `$auth` instance, meaning that you can access it anywhere using `this.$auth`.
 For plugins, asyncData, fetch, nuxtServerInit and Middleware, you can access it from `context.$auth`.
@@ -123,7 +123,7 @@ Refreshes tokens if *refresh token* is available and not expired. This only work
 this.$auth.refreshTokens()
 ```
 
-> **TIP:** Useful to manually refresh the token when [autoRefresh](../schemes/refresh.md#autorefresh) is disabled.
+> **TIP:** Useful to manually refresh the token.
 
 ### `onError(handler)`
 

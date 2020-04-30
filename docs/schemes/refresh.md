@@ -1,10 +1,10 @@
 # Refresh
 
-[Source Code](https://github.com/nuxt-community/auth-module/blob/dev/lib/schemes/refresh.js)
+[Source Code](https://github.com/nuxt-community/auth-module/blob/dev/src/schemes/refresh.ts)
 
 `refresh` is an extended version of `local` scheme, made for systems that use token refresh.
 
-You can set `_scheme` to `refresh` to enable it.
+You can set `scheme` to `refresh` to enable it.
 
 ## Usage
 
@@ -59,21 +59,15 @@ To manually refresh the token:
 this.$auth.refreshTokens()
 ```
 
-Or enable [autoRefresh](#autorefresh) option to automatically refresh tokens.
-
 ## Options
 
 ```js
 auth: {
     strategies: {
       local: {
-        //assigning `refresh` will override `local` scheme
-        _scheme: 'refresh',
+        scheme: 'refresh',
         token: {
-          // Use `property` key to define the key from the JSON response. 
-          // Use the `.` anotation to access sub-object keys `parent.childKey`  
           property: 'access_token',
-          // Use `maxAge` key to define the token's life in milliseconds
           maxAge: 1800,
           // type: 'Bearer'
         },
@@ -86,15 +80,12 @@ auth: {
           property: 'user',
           // autoFetch: true
         },
-        clientId: false,
-        grantType: false,
         endpoints: {
           login: { url: '/api/auth/login', method: 'post' },
           refresh: { url: '/api/auth/refresh', method: 'post' },
           user: { url: '/api/auth/user', method: 'get' },
           logout: { url: '/api/auth/logout', method: 'post' }
         },
-        // autoRefresh: false,
         // autoLogout: false
       }
     }
@@ -104,7 +95,7 @@ auth: {
 ### `endpoints`
 
 Each endpoint is used to make requests using axios. They are basically extending Axios [Request Config](https://github.com/axios/axios#request-config).
-Additional headers and other Axios configuration can be based in the endpoint's child object. 
+
 ::: tip
 To disable each endpoint, simply set it's value to `false`.
 :::
@@ -142,6 +133,10 @@ By default is set to 30 minutes.
 
 Here you configure the refresh token options.
 
+#### `required`
+
+In instances where you do not need to refresh the token you can assign `false` to the `required` property. This disables the `refreshToken`.
+
 #### `property`
 
 `property` can be used to specify which field of the response JSON to be used for value. It can be `false` to directly use API response or being more complicated like `auth.refresh_token`.
@@ -178,56 +173,18 @@ This option can be used to disable user fetch after login. It is useful when you
 
 ### `clientId`
 
-Here you configure the client id options.
+- Default: `false`
 
-#### `property`
-
-- Default `client_id`
-
-`clientId` can be used to specify which field of the response JSON to be used for value. It can be `false` to directly use API response or being more complicated like `auth.client_id`
-
-#### `data`
-
-- Default: `client_id`
-
-`data` can be used to set the name of the property you want to send in the request.
-
-::: tip
-To disable clientId, simply set it's value to `false`.
-:::
+If your backend requires client id, it can be set here.
 
 ### `grantType`
 
-Here you configure the grant type options.
-
-#### `data`
-
-- Default: `grant_type`
-
-`data` can be used to set the name of the property you want to send in the request.
-
-#### `value`
-
-- Default: `refresh_token`
-
-It's the value of the grant type you want.
-
-::: tip
-To disable grantType, simply set it's value to `false`.
-:::
-
-### `autoRefresh`
-
 - Default: `false`
 
-When enabled it will refresh the token before it expires. The auto refresh will happen when the time reach 75% of the expiration time or when the page is reloaded.
+If your backend requires grant type, it can be set here.
 
 ### `autoLogout`
 
 - Default: `false`
 
 This option will logout the user on load the page, if token has expired.
-
-::: tip
-Mostly used with [`autoRefresh`](#autorefresh).
-:::

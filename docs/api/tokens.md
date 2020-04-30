@@ -1,6 +1,6 @@
 # tokens
 
-[Token Source Code](https://github.com/nuxt-community/auth-module/blob/dev/lib/core/token.js) and [Refresh Token Source Code](https://github.com/nuxt-community/auth-module/blob/dev/lib/core/refreshToken.js)
+[Token Source Code](https://github.com/nuxt-community/auth-module/blob/dev/src/inc/token.ts) and [Refresh Token Source Code](https://github.com/nuxt-community/auth-module/blob/dev/src/inc/refresh-token.ts)
 
 **Token** and **Refresh Token** are available on `$auth.token` and `$auth.refreshToken`. Both have getters and setters and other helpers.
 
@@ -73,14 +73,6 @@ this.$auth.token.status().expired()
 ::: tip
 Call `this.$auth.token.status()` once and assign it to a variable
 :::
-
-### `refreshIn()`
-
-Get interval time between refreshes, in **milliseconds**. Used for scheduled refresh. See [autoRefresh](../schemes/refresh.md#autorefresh) and [initializeScheduledRefresh](refreshController.md#initializescheduledrefresh)
-
-```js
-this.$auth.token.refreshIn()
-```
 
 ## Refresh Token methods
 

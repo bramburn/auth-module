@@ -1,6 +1,6 @@
 # Local
 
-[Source Code](https://github.com/nuxt-community/auth-module/blob/master/lib/schemes/local.js)
+[Source Code](https://github.com/nuxt-community/auth-module/blob/dev/src/schemes/local.ts)
 
 `local` is the default, credentials/token based scheme for flows like `JWT`.
 
@@ -164,3 +164,15 @@ Here you configure the user options.
 This option can be used to disable user fetch after login.
 
 > TIP: It is useful when your login response already have the user. To manually set the user, use [setUser](../api/auth.md#setuser-user).
+
+### `clientId`
+
+- Default: `false`
+
+If your backend requires client id, it can be set here.
+
+### `grantType`
+
+- Default: `false`
+
+If your backend requires grant type, it can be set here.
